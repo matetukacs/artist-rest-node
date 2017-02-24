@@ -2,7 +2,7 @@ const restify = require('restify');
 const server = restify.createServer();
 const mongoose = require('mongoose/');
 const config = require('./config');
-const db = mongoose.connect(config.creds.mongoose_auth),
+const db = mongoose.connect(config.creds.mongoose_auth);
 const Schema = mongoose.Schema;
 
 server.use(restify.bodyParser());
