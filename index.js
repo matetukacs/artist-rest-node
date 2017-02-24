@@ -1,28 +1,13 @@
-// const restify = require('restify'); 
+const restify = require('restify'); 
 const mongoose = require('mongoose');
 const backbone = require('backbone');
-const express = require('express');
 const config = require('./config');
-const bodyParser = require('body-parser');
 
-const app = express();
-// const server = restify.createServer();
+const server = restify.createServer();
 const db = mongoose.connect(config.creds.mongoose_auth);
 const Schema = mongoose.Schema;
 
-// server.use(restify.bodyParser());
-
-app.set('port', (process.env.PORT || 5000))
-
-// Process application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: false}))
-
-// Process application/json
-app.use(bodyParser.json())
-
-app.listen(app.get('port'), () => {
-  console.log('running on port', app.get('port'));
-});
+server.use(restify.bodyParser());
 
 var ArtistSchema = new Schema({
   id: mongoose.Schema.ObjectId,
@@ -44,6 +29,6 @@ var ArtistCollection = backbone.Collection.extend({
     , url: '/artists'
 });
 
-app.get('/a', (req, res) => {
+server.get('/a', (req, res) => {
 	res.sendStatus(200);
 });
