@@ -30,10 +30,12 @@ var newArtist = new Artist({
   	genres: ["g1", "g2", "g3"],
   	albums: ["a1", "a2", "a3"] });
 
-var ArtistCollection = backbone.Collection.extend({
-    model: Artist
-    , url: '/artists'
-});
+newArtist.save();
+
+// var ArtistCollection = backbone.Collection.extend({
+//     model: Artist
+//     , url: '/artists'
+// });
 
 server.get('/a', (req, res, next) => {
 	Artist.find().exec().then(console.log(data));
