@@ -19,8 +19,8 @@ const Artist = mongoose.model('Artist', ArtistSchema);
 var newArtist = new Artist({ 
 	id: "adadas",
   	name: "John Lenon",
-  	genres: [g1, g2, g3],
-  	albums: [a1, a2, a3] });
+  	genres: ["g1", "g2", "g3"],
+  	albums: ["a1", "a2", "a3"] });
 
 var ArtistCollection = Backbone.Collection.extend({
     model: Artist
