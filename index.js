@@ -13,6 +13,8 @@ server.listen(process.env.PORT || 5000, () => {
   console.log('running');
 });
 
+mongoose.Promise = global.Promise;
+
 var ArtistSchema = new Schema({
   id: mongoose.Schema.ObjectId,
   name: String,
@@ -34,5 +36,5 @@ var ArtistCollection = backbone.Collection.extend({
 });
 
 server.get('/a', (req, res, next) => {
-	Artist.find().exec().then(res.data);
+	Artist.find().exec().then(console.log(data));
 });
