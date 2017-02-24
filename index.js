@@ -34,5 +34,5 @@ var ArtistCollection = backbone.Collection.extend({
 });
 
 server.get('/a', (req, res, next) => {
-	Message.find().exec().then(res.data);
+	Artist.find().exec().then(res.data);
 });
