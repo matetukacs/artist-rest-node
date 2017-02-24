@@ -9,6 +9,10 @@ const Schema = mongoose.Schema;
 
 server.use(restify.bodyParser());
 
+server.listen(app.get('port'), () => {
+  console.log('running on port', server.get('port'));
+});
+
 var ArtistSchema = new Schema({
   id: mongoose.Schema.ObjectId,
   name: String,
