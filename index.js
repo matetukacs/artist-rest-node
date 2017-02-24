@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 server.use(restify.bodyParser());
 
 var ArtistSchema = new Schema({
-  id: ObjectId,
+  id: mongoose.Schema.ObjectId,
   name: String,
   genres: Array,
   albums: Array
