@@ -40,6 +40,6 @@ var ArtistCollection = backbone.Collection.extend({
     , url: '/artists'
 });
 
-app.get('/a/', (req, res) => {
+app.get('/a', (req, res) => {
 	res.sendStatus(200);
 });
