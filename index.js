@@ -28,5 +28,5 @@ var ArtistCollection = Backbone.Collection.extend({
 });
 
 app.get('/a/', (req, res) => {
-
-	});
+	res(200);
+});
