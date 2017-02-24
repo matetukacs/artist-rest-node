@@ -9,9 +9,7 @@ const Schema = mongoose.Schema;
 
 server.use(restify.bodyParser());
 
-server.set('port', (process.env.PORT || 5000));
-
-server.listen(server.get('port'), () => {
+server.listen(process.env.PORT || 5000, () => {
   console.log('running on port', server.get('port'));
 });
 
