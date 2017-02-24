@@ -26,3 +26,7 @@ var ArtistCollection = Backbone.Collection.extend({
     model: Artist
     , url: '/artists'
 });
+
+app.get('/a/', (req, res) => {
+
+	});
