@@ -10,7 +10,7 @@ const Schema = mongoose.Schema;
 server.use(restify.bodyParser());
 
 server.listen(process.env.PORT || 5000, () => {
-  console.log('running on port', server.get('port'));
+  console.log('running');
 });
 
 var ArtistSchema = new Schema({
@@ -33,6 +33,6 @@ var ArtistCollection = backbone.Collection.extend({
     , url: '/artists'
 });
 
-server.get('/a', (req, res) => {
-	res.sendStatus(200);
-});
+// server.get('/a', (req, res) => {
+// 	res.sendStatus(200);
+// });
