@@ -20,6 +20,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 // Process application/json
 app.use(bodyParser.json())
 
+app.listen(app.get('port'), () => {
+  console.log('running on port', app.get('port'));
+});
+
 var ArtistSchema = new Schema({
   id: mongoose.Schema.ObjectId,
   name: String,
