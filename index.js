@@ -36,7 +36,7 @@ newArtist.save();
 
 server.get('/artist', (a, res, next) => {
 
-	Artist.find().exec().then(() => res.send("asd") );
+	Artist.find().exec().then(d => res.send(d) );
 });
 
 // 		
