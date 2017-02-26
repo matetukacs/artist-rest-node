@@ -32,8 +32,14 @@ newArtist.save();
 
 
 server.get('/artist', (a, res, next) => {
-	// console.log("")
-	// Artist.find().exec().then(res.send);
+
+	// Resitify currently has a bug which doesn't allow you to set default headers
+  // This headers comply with CORS and allow us to server our response to any origin
+  res.header("Access-Control-Allow-Origin", "*"); 
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+	console.log("")
+	Artist.find().exec().then(res.send);
 });
 
 // 		
