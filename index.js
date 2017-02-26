@@ -1,9 +1,8 @@
 const restify = require('restify'); 
 const mongoose = require('mongoose');
-const backbone = require('backbone');
 const config = require('./config');
 
-const server = restify.createServer();
+const server = restify.createServer({});
 const db = mongoose.connect(config.creds.mongoose_auth);
 const Schema = mongoose.Schema;
 
@@ -31,13 +30,9 @@ var newArtist = new Artist({
 
 newArtist.save();
 
-// var ArtistCollection = backbone.Collection.extend({
-//     model: Artist
-//     , url: '/artists'
-// });
 
 server.get('/artists', (req, res, next) => {
-	console.log("res",res);
+	console.log("")
 	Artist.find().exec().then(res.send);
 });
 
