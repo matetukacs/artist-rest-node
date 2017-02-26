@@ -40,18 +40,18 @@ server.get('/artists', (req, res, next) => {
 	Artist.find().exec().then(res.send);
 });
 
-server.get('/artist', (req, res, next) => {
-	Artist.find().exec().then(console.log);
-});
+// server.get('/artist', (req, res, next) => {
+// 	Artist.find().exec().then(console.log);
+// });
 
-server.put('/artist', (req, res, next) => {
-	Artist.find().exec().then(console.log);
-});
+// server.put('/artist', (req, res, next) => {
+// 	Artist.find().exec().then(console.log);
+// });
 
-server.post('/artist', (req, res, next) => {
-	Artist.find().exec().then(console.log);
-});
+// server.post('/artist', (req, res, next) => {
+// 	Artist.find().exec().then(console.log);
+// });
 
-server.delete('/artist', (req, res, next) => {
-	Artist.find().exec().then(console.log);
-});
+// server.delete('/artist', (req, res, next) => {
+// 	Artist.find().exec().then(console.log);
+// });
