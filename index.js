@@ -2,7 +2,7 @@ const restify = require('restify');
 const mongoose = require('mongoose');
 const config = require('./config');
 
-const server = restify.createServer();
+const server = restify.createServer({});
 const db = mongoose.connect(config.creds.mongoose_auth);
 const Schema = mongoose.Schema;
 
@@ -37,12 +37,10 @@ server.use(restify.fullResponse())
 
 server.get('/artist', (a, res, next) => {
 
-	res.send(a);
-	 // Artist.find().exec().then( data => {
-	 // 	console.log(data);
-	 // 	res.send(data);
-	 // 	next();
-	 // });
+
+	res.send("asd");
+
+	// Artist.find().exec().then(res.send);
 });
 
 // 		
