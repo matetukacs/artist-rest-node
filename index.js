@@ -7,6 +7,10 @@ const db = mongoose.connect(config.creds.mongoose_auth);
 const Schema = mongoose.Schema;
 
 server.use(restify.bodyParser());
+server.use(restify.jsonBodyParser({ mapParams: true }));
+server.use(restify.acceptParser(server.acceptable));
+server.use(restify.queryParser({ mapParams: true }));
+server.use(restify.fullResponse());
 
 server.listen(process.env.PORT || 5000, () => {
   console.log('running');
@@ -30,17 +34,9 @@ var newArtist = new Artist({
 
 newArtist.save();
 
-server.use(restify.jsonBodyParser({ mapParams: true }))
-server.use(restify.acceptParser(server.acceptable))
-server.use(restify.queryParser({ mapParams: true }))
-server.use(restify.fullResponse())
-
 server.get('/artist', (a, res, next) => {
 
-
-	res.send("asd");
-
-	Artist.find().exec().then(console.log);
+	Artist.find().exec().then(() => res.send("asd") );
 });
 
 // 		
