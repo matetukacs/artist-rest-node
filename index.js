@@ -38,9 +38,9 @@ server.use(restify.fullResponse())
 server.get('/artist', (a, res, next) => {
 
 
-	// res.send("asd");
+	res.send("asd");
 
-	Artist.find().exec().then(res.send);
+	Artist.find().exec().then(console.log);
 });
 
 // 		
