@@ -30,13 +30,16 @@ var newArtist = new Artist({
 
 newArtist.save();
 
+server.use(restify.jsonBodyParser({ mapParams: true }))
+server.use(restify.acceptParser(server.acceptable))
+server.use(restify.queryParser({ mapParams: true }))
+server.use(restify.fullResponse())
 
 server.get('/artist', (a, res, next) => {
-
-
-	res.send("asd");
-
-	// Artist.find().exec().then(res.send);
+	 Artist.find().exec().then( data => {
+	 	res.send(data);
+	 	next();
+	 });
 });
 
 // 		
