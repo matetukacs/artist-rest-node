@@ -38,8 +38,8 @@ server.get('/artists', (a, res, next) => {
 	Artist.find().exec().then( data => res.send(data) );
 });
 
-server.get('/artist', ({ params }, res, next) => {
-	Artist.find({ id: params.message }).exec().then( data => res.send(data) );
+server.get('/artist/:id', (a, res, next) => {
+	Artist.find({ id: id }).exec().then( data => res.send(data) );
 });
 
 // 		
