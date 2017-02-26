@@ -32,8 +32,8 @@ newArtist.save();
 
 
 server.get('/artist', (a, res, next) => {
-	console.log("")
-	Artist.find().exec().then(res.send);
+	// console.log("")
+	// Artist.find().exec().then(res.send);
 });
 
 // 		
