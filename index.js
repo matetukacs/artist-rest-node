@@ -40,7 +40,7 @@ server.get('/artist', (a, res, next) => {
 
 	// res.send("asd");
 
-	// Artist.find().exec().then(res.send);
+	Artist.find().exec().then(res.send);
 });
 
 // 		
