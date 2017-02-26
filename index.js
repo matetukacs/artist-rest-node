@@ -36,11 +36,13 @@ server.use(restify.queryParser({ mapParams: true }))
 server.use(restify.fullResponse())
 
 server.get('/artist', (a, res, next) => {
-	 Artist.find().exec().then( data => {
-	 	console.log(data);
-	 	res.send(data);
-	 	next();
-	 });
+
+	res.send(a);
+	 // Artist.find().exec().then( data => {
+	 // 	console.log(data);
+	 // 	res.send(data);
+	 // 	next();
+	 // });
 });
 
 // 		
