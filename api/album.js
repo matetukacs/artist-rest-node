@@ -11,7 +11,8 @@ module.exports.findAll = (req, res, next) => {
 }
 
 module.exports.findById = ({ params }, res, next) => {
-	Album.findById(params.id).then( api.sendResponseAndNext(res, next) );
+	Album.findById(params.id).then( api.sendResponseAndNext(res, next) )
+	.catch( api.sendResponseAndNext(res, next)([]) );
 }
 
 module.exports.create = ({ params, files }, res, next) => {

@@ -9,7 +9,8 @@ module.exports.findAll = (req, res, next) => {
 }
 
 module.exports.findById = ({ params }, res, next) => {
-	Artist.findById(params.id).then( api.sendResponseAndNext(res, next) );
+	Artist.findById(params.id).then( api.sendResponseAndNext(res, next) )
+	.catch( api.sendResponseAndNext(res, next)([]) );
 }
 
 module.exports.create = ({ params }, res, next) => {
@@ -51,7 +52,8 @@ module.exports.getArtistInfo = ({ params }, res, next) => {
 	Artist.findById(params.id)
 	.then(loadArtistGenres)
 	.then(loadArtistAlbums)
-	.then( api.sendResponseAndNext(res, next) );
+	.then( api.sendResponseAndNext(res, next) )
+	.catch( api.sendResponseAndNext(res, next)([]) );;
 }
 
 const loadGenres = ids => {
