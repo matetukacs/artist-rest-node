@@ -6,6 +6,7 @@ const _ = require('lodash');
 const r = require('./request');
 const schema = require('./schema');
 const artistApi = require('./api/artist');
+const genreApi = require('./api/genre');
 
 const server = restify.createServer({});
 const db = mongoose.connect(config.mongoose.auth);
@@ -32,36 +33,15 @@ server.put('/artist/:id', artistApi.update);
 
 server.del('/artist/:id', artistApi.delete);
 
+server.get('/genres', genreApi.findAll);
 
-const Genre = mongoose.model('Genre', schema.Genre); 
+server.post('/genre', genreApi.create);
 
-server.get('/genres', (req, res, next) => {
-	Genre.find().then( sendResponseAndNext(res, next) );
-});
+server.get('/genre/:id', genreApi.findById);
 
-server.post('/genre', ({ params }, res, next) => {
+server.put('/genre/:id', genreApi.update;
 
-	const newGenre = new Genre();
-	newGenre.name = params.name;
-
-	newGenre.save().then( sendEmptyResponseAndNext(res, next) );
-});
-
-server.get('/genre/:id', ({ params }, res, next) => {
-	Genre.findById(params.id).then( sendResponseAndNext(res, next) );
-});
-
-server.put('/genre/:id', ({ params, body }, res, next) => {
-	Genre.findById(params.id).then( genre => {
-		genre.name = body.name;
-
-		genre.save().then( sendEmptyResponseAndNext(res, next) );
-	});
-});
-
-server.del('/genre/:id', ({ params }, res, next) => {
-	Genre.findByIdAndRemove(params.id).then( sendEmptyResponseAndNext(res, next) );
-});
+server.del('/genre/:id', genreApi.delete;
 
 
 
