@@ -112,7 +112,7 @@ server.get('/albums', (req, res, next) => {
 
 server.post('/album', ({ params }, res, next) => {
 
-	const newAlbum = new Genre();
+	const newAlbum = new Album();
 	newAlbum.name = params.name;
 	newAlbum.imageUrl = params.imageUrl;
 
