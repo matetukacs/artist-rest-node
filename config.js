@@ -7,4 +7,4 @@ const fs_store_url = 'https://www.filestackapi.com/api/store/S3';
 const fs_album_container = 'album-covers';
 const fs_access = 'public';
 
-exports.file_store__request_url = `${fs_store_url}?key=${fs_api_key}&container=${fs_album_container}&access=${fs_access}`;
+exports.file_store_request_url = `${fs_store_url}?key=${fs_api_key}&container=${fs_album_container}&access=${fs_access}`;
