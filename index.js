@@ -33,8 +33,6 @@ server.put('/artist/:id', artistApi.update);
 server.del('/artist/:id', artistApi.delete);
 
 
-const Genre = mongoose.model('Genre', schema.Genre); 
-
 server.get('/genres', (req, res, next) => {
 	Genre.find().then( sendResponseAndNext(res, next) );
 });

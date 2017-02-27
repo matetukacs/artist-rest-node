@@ -1,10 +1,10 @@
 // const { model } = require('mongoose');
-// const schema = require('./schema');
+// const schema = require('./../schema');
 
-// const Artist = model('Artist', schema.Artist); 
+// const Genre = model('Genre', schema.Genre); 
 
 // module.exports.findAll = (req, res, next) => {
-// 	Artist.find().then( sendResponseAndNext(res, next) );
+// 	Genre.find().then( sendResponseAndNext(res, next) );
 // }
 
 // module.exports.findById = ({ params }, res, next) => {
