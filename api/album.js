@@ -1,32 +1,42 @@
-// const { model } = require('mongoose');
-// const schema = require('./../schema');
-// const api = require('./api');
+const mongoose = require('mongoose');
+const schema = require('./../schema');
+const api = require('./api');
 
-// const Genre = model('Genre', schema.Genre); 
+const Album = mongoose.model('Album', schema.Album);
 
-// module.exports.findAll = (req, res, next) => {
-// 	Genre.find().then( api.sendResponseAndNext(res, next) );
-// }
+module.exports.findAll = (req, res, next) => {
+	Album.find().then( sendResponseAndNext(res, next) );
+}
 
-// module.exports.findById = ({ params }, res, next) => {
-// 	Genre.findById(params.id).then( api.sendResponseAndNext(res, next) );
-// }
+module.exports.findById = ({ params }, res, next) => {
+	Album.findById(params.id).then( sendResponseAndNext(res, next) );
+}
 
-// module.exports.create = ({ params }, res, next) => {
-// 	const newGenre = new Genre();
-// 	newGenre.name = params.name;
+module.exports.create = ({ params, files }, res, next) => {
 
-// 	newGenre.save().then( api.sendEmptyResponseAndNext(res, next) );
-// }
+	const saveAlbum = (name) => {
+		return (url) => {
+			const newAlbum = new Album();
+			newAlbum.name = name;
+			newAlbum.imageUrl = url;
+			return newAlbum.save();
+		}
+	}
+	
+	r.postRequest(config.file_store_request_url, {fileUpload: files.image})
+	.then(( { url } ) => saveAlbum(params.name)(url) )
+	.then( sendEmptyResponseAndNext(res, next) );
+}
 
-// module.exports.update = ({ params, body }, res, next) => {
-// 	Genre.findById(params.id).then( genre => {
-// 		genre.name = body.name;
+module.exports.update = ({ params, body }, res, next) => {
+	Album.findById(params.id).then( album => {
+		album.name = body.name;
+		album.imageUrl = body.imageUrl;
 
-// 		genre.save().then( api.sendEmptyResponseAndNext(res, next) );
-// 	});
-// }
+		album.save().then( sendEmptyResponseAndNext(res, next) );
+	});
+}
 
-// module.exports.delete = ({ params }, res, next) => {
-// 	Genre.findByIdAndRemove(params.id).then( api.sendEmptyResponseAndNext(res, next) );
-// }
+module.exports.delete = ({ params }, res, next) => {
+	Album.findByIdAndRemove(params.id).then( sendEmptyResponseAndNext(res, next) );
+}

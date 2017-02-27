@@ -7,6 +7,7 @@ const r = require('./request');
 const schema = require('./schema');
 const artistApi = require('./api/artist');
 const genreApi = require('./api/genre');
+const albumApi = require('./api/album');
 
 const server = restify.createServer({});
 const db = mongoose.connect(config.mongoose.auth);
@@ -25,9 +26,9 @@ mongoose.Promise = global.Promise;
 
 server.get('/artists', artistApi.findAll);
 
-server.post('/artist', artistApi.create);
-
 server.get('/artist/:id', artistApi.findById);
+
+server.post('/artist', artistApi.create);
 
 server.put('/artist/:id', artistApi.update);
 
@@ -37,55 +38,27 @@ server.del('/artist/:id', artistApi.delete);
 
 server.get('/genres', genreApi.findAll);
 
-server.post('/genre', genreApi.create);
-
 server.get('/genre/:id', genreApi.findById);
+
+server.post('/genre', genreApi.create);
 
 server.put('/genre/:id', genreApi.update);
 
 server.del('/genre/:id', genreApi.delete);
 
-
-
-const Album = mongoose.model('Album', schema.Album); 
-
-server.get('/albums', (req, res, next) => {
-	Album.find().then( sendResponseAndNext(res, next) );
-});
  
-server.post('/album', ({ params, files }, res, next) => {
 
-	const saveAlbum = (name) => {
-		return (url) => {
-			const newAlbum = new Album();
-			newAlbum.name = name;
-			newAlbum.imageUrl = url;
-			return newAlbum.save();
-		}
-	}
-	
+server.get('/albums', albumApi.findAll);
 
-	r.postRequest(config.file_store_request_url, {fileUpload: files.image})
-	.then(( { url } ) => saveAlbum(params.name)(url) )
-	.then( sendEmptyResponseAndNext(res, next) );
-});
+server.get('/album/:id', albumApi.findById);
 
-server.get('/album/:id', ({ params }, res, next) => {
-	Album.findById(params.id).then( sendResponseAndNext(res, next) );
-});
+server.post('/album', albumApi.create);
 
-server.put('/album/:id', ({ params, body }, res, next) => {
-	Album.findById(params.id).then( album => {
-		album.name = body.name;
-		album.imageUrl = body.imageUrl;
+server.put('/album/:id', albumApi.update);
 
-		album.save().then( sendEmptyResponseAndNext(res, next) );
-	});
-});
+server.del('/album/:id', albumApi.delete);
 
-server.del('/album/:id', ({ params }, res, next) => {
-	Album.findByIdAndRemove(params.id).then( sendEmptyResponseAndNext(res, next) );
-});
+
 
 server.get('/artistInfo/:id', ({ params }, res, next) => {
 
