@@ -136,6 +136,31 @@ server.del('/album/:id', ({ params }, res, next) => {
 	Album.findByIdAndRemove(params.id).then( sendEmptyResponseAndNext(res, next) );
 });
 
+server.get('/artistInfo/:id', ({ params }, res, next) => {
+
+	const loadGenres = artist => loadGenres(artist.genres).then( genres => {
+		artist.genres = genres;
+		return artist;
+	});
+	const loadAlbums = artist => loadAlbums(artist.albums).then( albums => {
+		artist.albums = albums;
+		return artist;
+	});
+
+	Artist.findById(params.id)
+	.then(loadGenres)
+	.then(loadAlbums)
+	.then( sendResponse(res), next );
+});
+
+const loadGenres = (...ids) => {
+	return Promise.all( ids.map( gid => Genre.findById(gid) ) );
+}
+
+const loadAlbums = (...ids) => {
+	return Promise.all( ids.map( aid => Album.findById(aid) ) );
+}
+
 const sendResponseAndNext = (res, next) => _.flow(sendResponse(res), next);
 
 const sendResponse = (res) => {
