@@ -40,7 +40,7 @@ server.put('/artist/:id', ({ params, body }, res, next) => {
 	Artist.findById(params.id).then( artist => {
 		artist.name = body.name;
 
-		artist.save().then( () => res.sendStatus(200) );
+		artist.save().then( () => res.send() );
 	});
 });
 
