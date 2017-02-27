@@ -125,7 +125,7 @@ server.post('/album', ({ params, files }, res, next) => {
 		}
 	}
 	
-	const fileStoreUrl = config.filestack.store_url + '?key=' + config.creds.filestack_api_key + '&container=' + config.filestack.albums_container;
+	const fileStoreUrl = `${config.filestack.store_url}?key=${config.creds.filestack_api_key}&container=${config.filestack.albums_container}&access=${config.filestack.access}`;
 
 	r.postRequest(fileStoreUrl, {fileUpload: files.image})
 	.then(console.log);

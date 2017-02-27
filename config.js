@@ -6,4 +6,5 @@ exports.creds = {
 exports.filestack = {
 	store_url: 'https://www.filestackapi.com/api/store/S3',
 	album_container: 'album-covers'
+	access: 'public';
 }
