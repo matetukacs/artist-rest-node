@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const schema = require('./../schema');
 const api = require('./api');
+const r = require('./request');
 
 const Album = mongoose.model('Album', schema.Album);
 
