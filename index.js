@@ -114,6 +114,8 @@ server.get('/albums', (req, res, next) => {
  
 server.post('/album', ({ params }, res, next) => {
 
+	console.log(params.image);
+
 	const saveAlbum = (name) => {
 		return (url) => {
 
