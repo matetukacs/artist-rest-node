@@ -10,7 +10,7 @@ module.exports.findAll = (req, res, next) => {
 
 module.exports.findById = ({ params }, res, next) => {
 	Artist.findById(params.id).then( api.sendResponseAndNext(res, next) )
-	.catch( () => api.sendResponseAndNext(res, next)([]) );
+	.catch( () => api.sendResponseAndNext(res, next)({}) );
 }
 
 module.exports.create = ({ params }, res, next) => {
