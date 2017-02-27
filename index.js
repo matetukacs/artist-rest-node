@@ -5,6 +5,7 @@ const _ = require('lodash');
 
 const r = require('./request');
 const schema = require('./schema');
+const artistApi = require('./api/artist');
 
 const server = restify.createServer({});
 const db = mongoose.connect(config.mongoose.auth);
@@ -23,37 +24,15 @@ mongoose.Promise = global.Promise;
 
 const Artist = mongoose.model('Artist', schema.Artist); 
 
-server.get('/artists', (req, res, next) => {
-	Artist.find().then( sendResponseAndNext(res, next) );
-});
+server.get('/artists', artistApi.findAll);
 
-server.post('/artist', ({ params }, res, next) => {
+server.post('/artist', artistApi.create);
 
-	const newArtist = new Artist();
-	newArtist.name = params.name;
-	newArtist.genres = params.genres;
-	newArtist.albums = params.albums;
+server.get('/artist/:id', artistApi.findById);
 
-	newArtist.save().then( sendEmptyResponseAndNext(res, next) );
-});
+server.put('/artist/:id', artistApi.update);
 
-server.get('/artist/:id', ({ params }, res, next) => {
-	Artist.findById(params.id).then( sendResponseAndNext(res, next) );
-});
-
-server.put('/artist/:id', ({ params, body }, res, next) => {
-	Artist.findById(params.id).then( artist => {
-		artist.name = body.name;
-		artist.genres = body.genres;
-		artist.albums = body.albums;
-
-		artist.save().then( sendEmptyResponseAndNext(res, next) );
-	});
-});
-
-server.del('/artist/:id', ({ params }, res, next) => {
-	Artist.findByIdAndRemove(params.id).then( sendEmptyResponseAndNext(res, next) );
-});
+server.del('/artist/:id', artistApi.delete);
 
 
 const Genre = mongoose.model('Genre', schema.Genre); 
@@ -164,5 +143,4 @@ const sendEmptyResponseAndNext = (res, next) => _.flow(sendEmptyResponse(res), n
 
 const sendEmptyResponse = (res) => {
 	return () => res.send();
-}
-// 		
+}	
