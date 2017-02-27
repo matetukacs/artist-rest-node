@@ -4,10 +4,10 @@ const config = require('./config');
 const _ = require('lodash');
 
 const r = require('./request');
+const schema = require('./schema');
 
 const server = restify.createServer({});
 const db = mongoose.connect(config.mongoose.auth);
-const Schema = mongoose.Schema;
 
 server.use(restify.bodyParser());
 server.use(restify.jsonBodyParser({ mapParams: true }));
@@ -21,25 +21,7 @@ server.listen(process.env.PORT || 5000, () => {
 
 mongoose.Promise = global.Promise;
 
-const ArtistSchema = new Schema({
-  id: mongoose.Schema.ObjectId,
-  name: String,
-  genres: Array,
-  albums: Array
-});
-
-const GenreSchema = new Schema({
-  id: mongoose.Schema.ObjectId,
-  name: String
-});
-
-const AlbumSchema = new Schema({
-  id: mongoose.Schema.ObjectId,
-  name: String,
-  imageUrl: String
-});
-
-const Artist = mongoose.model('Artist', ArtistSchema); 
+const Artist = mongoose.model('Artist', schema.Artist); 
 
 server.get('/artists', (req, res, next) => {
 	Artist.find().then( sendResponseAndNext(res, next) );
@@ -74,7 +56,7 @@ server.del('/artist/:id', ({ params }, res, next) => {
 });
 
 
-const Genre = mongoose.model('Genre', GenreSchema); 
+const Genre = mongoose.model('Genre', schema.Genre); 
 
 server.get('/genres', (req, res, next) => {
 	Genre.find().then( sendResponseAndNext(res, next) );
@@ -106,7 +88,7 @@ server.del('/genre/:id', ({ params }, res, next) => {
 
 
 
-const Album = mongoose.model('Album', AlbumSchema); 
+const Album = mongoose.model('Album', schema.Album); 
 
 server.get('/albums', (req, res, next) => {
 	Album.find().then( sendResponseAndNext(res, next) );
@@ -116,11 +98,9 @@ server.post('/album', ({ params, files }, res, next) => {
 
 	const saveAlbum = (name) => {
 		return (url) => {
-
 			const newAlbum = new Album();
 			newAlbum.name = name;
 			newAlbum.imageUrl = url;
-
 			return newAlbum.save();
 		}
 	}
