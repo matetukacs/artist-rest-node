@@ -112,9 +112,9 @@ server.get('/albums', (req, res, next) => {
 	Album.find().then( sendResponseAndNext(res, next) );
 });
  
-server.post('/album', ({ params }, res, next) => {
+server.post('/album', (req, res, next) => {
 
-	console.log(params);
+	console.log(req);
 
 	const saveAlbum = (name) => {
 		return (url) => {
