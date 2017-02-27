@@ -159,11 +159,11 @@ server.get('/artistInfo/:id', ({ params }, res, next) => {
 	.then( sendResponse(res), next );
 });
 
-const loadGenres = (...ids) => {
-	return Promise.all( ids.map( gid => console.log("iterating: ", gid) ) );
+const loadGenres = (ids) => {
+	return Promise.all( ids.map( gid => Genre.findById(gid) ) );
 }
 
-const loadAlbums = (...ids) => {
+const loadAlbums = (ids) => {
 	return Promise.all( ids.map( aid => Album.findById(aid) ) );
 }
 
