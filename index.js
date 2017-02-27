@@ -70,4 +70,34 @@ server.del('/artist/:id', ({ params }, res, next) => {
 	Artist.findByIdAndRemove(params.id).then( data => res.send(data) );
 });
 
+
+const Genre = mongoose.model('Genre', GenreSchema); 
+
+server.get('/genres', (a, res, next) => {
+	Genre.find().then( data => res.send(data) );
+});
+
+server.post('/genre', ({ params }, res, next) => {
+
+	const newGenre = new Genre();
+	newGenre.name = params.name;
+
+	newGenre.save().then( data => res.send(data) );
+});
+
+server.get('/genre/:id', ({ params }, res, next) => {
+	Genre.findById(params.id).then( data => res.send(data) );
+});
+
+server.put('/genre/:id', ({ params, body }, res, next) => {
+	Genre.findById(params.id).then( genre => {
+		genre.name = body.name;
+
+		genre.save().then( () => res.send() );
+	});
+});
+
+server.del('/genre/:id', ({ params }, res, next) => {
+	Genre.findByIdAndRemove(params.id).then( data => res.send(data) );
+});
 // 		
