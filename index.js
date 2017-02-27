@@ -139,6 +139,6 @@ server.del('/album/:id', ({ params }, res, next) => {
 const sendResponseAndNext = (res, next) => _.flow(sendResponse(res), next);
 
 const sendResponse = (res) => {
-	return data = "" => res.send(data);
+	return (data = "") => res.send(data);
 }
 // 		
