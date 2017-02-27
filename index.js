@@ -49,7 +49,7 @@ server.post('/artist', ({ params }, res, next) => {
 	newArtist.genres = params.genres;
 	newArtist.albums = params.albums;
 
-	newArtist.save().then( data => res.send(data) );
+	newArtist.save().then( data => res.send() );
 });
 
 server.get('/artist/:id', ({ params }, res, next) => {
@@ -67,7 +67,7 @@ server.put('/artist/:id', ({ params, body }, res, next) => {
 });
 
 server.del('/artist/:id', ({ params }, res, next) => {
-	Artist.findByIdAndRemove(params.id).then( data => res.send(data) );
+	Artist.findByIdAndRemove(params.id).then( data => res.send() );
 });
 
 
@@ -82,7 +82,7 @@ server.post('/genre', ({ params }, res, next) => {
 	const newGenre = new Genre();
 	newGenre.name = params.name;
 
-	newGenre.save().then( data => res.send(data) );
+	newGenre.save().then( data => res.send() );
 });
 
 server.get('/genre/:id', ({ params }, res, next) => {
@@ -98,7 +98,7 @@ server.put('/genre/:id', ({ params, body }, res, next) => {
 });
 
 server.del('/genre/:id', ({ params }, res, next) => {
-	Genre.findByIdAndRemove(params.id).then( data => res.send(data) );
+	Genre.findByIdAndRemove(params.id).then( data => res.send() );
 });
 
 
@@ -115,7 +115,7 @@ server.post('/album', ({ params }, res, next) => {
 	newAlbum.name = params.name;
 	newAlbum.imageUrl = params.imageUrl;
 
-	newAlbum.save().then( data => res.send(data) );
+	newAlbum.save().then( data => res.send() );
 });
 
 server.get('/album/:id', ({ params }, res, next) => {
@@ -132,6 +132,6 @@ server.put('/album/:id', ({ params, body }, res, next) => {
 });
 
 server.del('/album/:id', ({ params }, res, next) => {
-	Album.findByIdAndRemove(params.id).then( data => res.send(data) );
+	Album.findByIdAndRemove(params.id).then( data => res.send() );
 });
 // 		
