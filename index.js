@@ -1,7 +1,7 @@
 const restify = require('restify'); 
 const mongoose = require('mongoose');
 const config = require('./config');
-const _ = require('lodash/core');
+const _ = require('lodash');
 
 const server = restify.createServer({});
 const db = mongoose.connect(config.creds.mongoose_auth);
