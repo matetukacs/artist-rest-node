@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const schema = require('./../schema');
-const api = require('api');
+const api = require('./api');
 
 this.prototype.common = api.common;
 
