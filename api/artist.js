@@ -53,7 +53,7 @@ module.exports.getArtistInfo = ({ params }, res, next) => {
 	.then(loadArtistGenres)
 	.then(loadArtistAlbums)
 	.then( api.sendResponseAndNext(res, next) )
-	.catch( api.sendResponseAndNext(res, next)([]) );;
+	.catch( api.sendResponseAndNext(res, next)({}) );;
 }
 
 const loadGenres = ids => {
