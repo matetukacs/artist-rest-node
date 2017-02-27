@@ -17,6 +17,7 @@ server.listen(process.env.PORT || 5000, () => {
 });
 
 mongoose.Promise = global.Promise;
+assert.equal(query.exec().constructor, global.Promise);
 
 var ArtistSchema = new Schema({
   id: mongoose.Schema.ObjectId,
