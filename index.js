@@ -42,7 +42,7 @@ server.put('/artist/:id', ({ params, body }, res, next) => {
 		artist.genres = body.genres;
 		artist.albums = albums;
 
-		artist.save().then( () => res.send() );
+		artist.save().then( () => res.sendStatus(200) );
 	});
 });
 
