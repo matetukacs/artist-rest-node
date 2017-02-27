@@ -3,6 +3,6 @@ exports.creds = {
   filestack_api_key: 'A09oJINhT6GQP9jv7ppXAz'
 }
 
-exports.filestack {
+exports.filestack = {
 	album_container: 'album-covers'
 }
