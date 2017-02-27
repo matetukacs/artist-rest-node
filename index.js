@@ -36,11 +36,11 @@ var newArtist = new Artist({
 newArtist.save();
 
 server.get('/artists', (a, res, next) => {
-	Artist.find().exec().then( data => res.send(data) );
+	Artist.find()..then( data => res.send(data) );
 });
 
 server.get('/artist/:id', ({ params }, res, next) => {
-	Artist.find({ id: params.id }).exec().then( data => res.send(data) );
+	Artist.findOne({ id: params.id }).then( data => res.send(data) );
 });
 
 // 		
