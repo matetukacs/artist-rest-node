@@ -37,7 +37,7 @@ server.get('/artist/:id', ({ params }, res, next) => {
 });
 
 server.put('/artist/:id', ({ params, body }, res, next) => {
-	Artist.UPDATE({ 
+	Artist.update({ 
 		name: body.name, 
 		genres: body.genres, 
 		albums: body.albums }, { id: params.id }).then( data => res.send(data) );
