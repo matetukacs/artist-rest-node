@@ -5,7 +5,7 @@ exports.mongoose = {
 exports.filestack = {
 	api_key : 'A09oJINhT6GQP9jv7ppXAz',
 	store_url : 'https://www.filestackapi.com/api/store/S3',
-	album_container : 'album-covers';
+	album_container : 'album-covers',
 	access : 'public',
 	file_store_url : `${store_url}?key=${api_key}&container=${album_container}&access=${access}`
 }
