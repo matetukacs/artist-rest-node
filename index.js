@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const _ = require('lodash');
 
+const r = require('./request');
+
 const server = restify.createServer({});
 const db = mongoose.connect(config.creds.mongoose_auth);
 const Schema = mongoose.Schema;
@@ -112,11 +114,20 @@ server.get('/albums', (req, res, next) => {
  
 server.post('/album', ({ params }, res, next) => {
 
-	const newAlbum = new Album();
-	newAlbum.name = params.name;
-	newAlbum.imageUrl = params.imageUrl;
+	const saveAlbum = (name) => {
+		return (url) => {
 
-	newAlbum.save().then( sendEmptyResponseAndNext(res, next) );
+			const newAlbum = new Album();
+			newAlbum.name = name;
+			newAlbum.imageUrl = url;
+
+			return newAlbum.save();
+		}
+	}
+	
+	r.postRequest('https://www.filestackapi.com/api/store/S3?key='+config.filestack_api_key)
+	.then( ( { url } ) => saveAlbum(params.name)(url) )
+	.then( sendEmptyResponseAndNext(res, next) );
 });
 
 server.get('/album/:id', ({ params }, res, next) => {
@@ -139,17 +150,14 @@ server.del('/album/:id', ({ params }, res, next) => {
 server.get('/artistInfo/:id', ({ params }, res, next) => {
 
 	const loadArtistGenres = artist => loadGenres(artist.genres).then( genres => {
-			console.log("genres", genres);
-			artist.genres = genres;
-			return artist;
-		});
+		artist.genres = genres;
+		return artist;
+	});
 
-	const loadArtistAlbums = artist => {
-		return loadAlbums(artist.albums).then( albums => {
-			artist.albums = albums;
-			return artist;
-		});
-	}
+	const loadArtistAlbums = artist => loadAlbums(artist.albums).then( albums => {
+		artist.albums = albums;
+		return artist;
+	});
 
 	Artist.findById(params.id)
 	.then(loadArtistGenres)
