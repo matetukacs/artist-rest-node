@@ -46,9 +46,9 @@ server.get('/artists', (req, res, next) => {
 server.post('/artist', ({ params }, res, next) => {
 
 	const newArtist = new Artist();
-	newArtist.name = params.name;
-	newArtist.genres = params.genres;
-	newArtist.albums = params.albums;
+	newArtist.name = "sad";
+	newArtist.genres = ["58b3dacd06906a0011713b74", "58b3b4d8ba7a5400111f396b"];
+	newArtist.albums = ["58b3daff06906a0011713b76"];
 
 	newArtist.save().then( sendEmptyResponseAndNext(res, next) );
 });
