@@ -11,4 +11,3 @@ module.exports.sendEmptyResponseAndNext = (res, next) => _.flow(sendEmptyRespons
 module.exports.sendEmptyResponse = (res) => {
 	return () => res.send();
 }	
-}
