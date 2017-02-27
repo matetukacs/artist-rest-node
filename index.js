@@ -109,7 +109,7 @@ const Album = mongoose.model('Album', AlbumSchema);
 server.get('/albums', (req, res, next) => {
 	Album.find().then( sendResponseAndNext(res, next) );
 });
-
+ 
 server.post('/album', ({ params }, res, next) => {
 
 	const newAlbum = new Album();
@@ -139,15 +139,18 @@ server.del('/album/:id', ({ params }, res, next) => {
 server.get('/artistInfo/:id', ({ params }, res, next) => {
 
 	const loadGenres = artist => {
+		console.log("loadGenres", artist);
 		return loadGenres(artist.genres).then( genres => {
 			artist.genres = genres;
 			return artist;
 		});
-	};
-	const loadAlbums = artist => loadAlbums(artist.albums).then( albums => {
-		artist.albums = albums;
-		return artist;
-	});
+	}
+	const loadAlbums = artist => {
+		return loadAlbums(artist.albums).then( albums => {
+			artist.albums = albums;
+			return artist;
+		});
+	}
 
 	Artist.findById(params.id)
 	.then(loadGenres)
