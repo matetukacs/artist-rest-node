@@ -51,5 +51,5 @@ module.exports.getArtistInfo = ({ params }, res, next) => {
 	Artist.findById(params.id)
 	.then(loadArtistGenres)
 	.then(loadArtistAlbums)
-	.then( api.sendResponse(res), next );
+	.then( api.sendResponseAndNext );
 }
