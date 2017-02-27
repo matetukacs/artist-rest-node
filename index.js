@@ -40,6 +40,7 @@ server.get('/artists', (a, res, next) => {
 });
 
 server.get('/artist/:id', ({ params }, res, next) => {
+	console.log(params);
 	Artist.findOne().then( data => res.send(data) );
 });
 
