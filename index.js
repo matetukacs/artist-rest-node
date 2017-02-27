@@ -100,4 +100,38 @@ server.put('/genre/:id', ({ params, body }, res, next) => {
 server.del('/genre/:id', ({ params }, res, next) => {
 	Genre.findByIdAndRemove(params.id).then( data => res.send(data) );
 });
+
+
+
+const Album = mongoose.model('Album', AlbumSchema); 
+
+server.get('/albums', (a, res, next) => {
+	Album.find().then( data => res.send(data) );
+});
+
+server.post('/album', ({ params }, res, next) => {
+
+	const newAlbum = new Genre();
+	newAlbum.name = params.name;
+	newAlbum.imageUrl = params.imageUrl;
+
+	newAlbum.save().then( data => res.send(data) );
+});
+
+server.get('/album/:id', ({ params }, res, next) => {
+	Album.findById(params.id).then( data => res.send(data) );
+});
+
+server.put('/album/:id', ({ params, body }, res, next) => {
+	Album.findById(params.id).then( album => {
+		album.name = body.name;
+		album.imageUrl = body.imageUrl;
+
+		album.save().then( () => res.send() );
+	});
+});
+
+server.del('/album/:id', ({ params }, res, next) => {
+	Album.findByIdAndRemove(params.id).then( data => res.send(data) );
+});
 // 		
