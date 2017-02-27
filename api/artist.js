@@ -34,3 +34,15 @@ module.exports.update = ({ params, body }, res, next) => {
 module.exports.delete = ({ params }, res, next) => {
 	Artist.findByIdAndRemove(params.id).then( sendEmptyResponseAndNext(res, next) );
 }
+
+const sendResponseAndNext = (res, next) => _.flow(sendResponse(res), next);
+
+const sendResponse = (res) => {
+	return (data = "") => res.send(data);
+}
+
+const sendEmptyResponseAndNext = (res, next) => _.flow(sendEmptyResponse(res), next);
+
+const sendEmptyResponse = (res) => {
+	return () => res.send();
+}	
