@@ -136,7 +136,7 @@ server.del('/album/:id', ({ params }, res, next) => {
 	Album.findByIdAndRemove(params.id).then( data => res.send() );
 });
 
-const sendResponseAndNext = (res, next) =  _.flow(sendResponse(res), next);
+const sendResponseAndNext = (res, next) => _.flow(sendResponse(res), next);
 
 const sendResponse = (res) => {
 	return data = "" => res.send(data);
