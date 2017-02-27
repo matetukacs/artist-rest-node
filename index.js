@@ -6,7 +6,7 @@ const _ = require('lodash');
 const r = require('./request');
 
 const server = restify.createServer({});
-const db = mongoose.connect(config.creds.mongoose_auth);
+const db = mongoose.connect(config.mongoose.auth);
 const Schema = mongoose.Schema;
 
 server.use(restify.bodyParser());
@@ -125,9 +125,8 @@ server.post('/album', ({ params, files }, res, next) => {
 		}
 	}
 	
-	const fileStoreUrl = `${config.filestack.store_url}?key=${config.creds.filestack_api_key}&container=${config.filestack.albums_container}&access=${config.filestack.access}`;
 
-	r.postRequest(fileStoreUrl, {fileUpload: files.image})
+	r.postRequest(config.file_store_url, {fileUpload: files.image})
 	.then(( { url } ) => saveAlbum(params.name)(url) )
 	.then( sendEmptyResponseAndNext(res, next) );
 });
