@@ -39,8 +39,6 @@ server.get('/artist/:id', ({ params }, res, next) => {
 server.put('/artist/:id', ({ params, body }, res, next) => {
 	Artist.findById(params.id).then( artist => {
 		artist.name = body.name;
-		artist.genres = body.genres;
-		artist.albums = body.albums;
 
 		artist.save().then( () => res.sendStatus(200) );
 	});
