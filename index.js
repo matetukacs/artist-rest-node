@@ -160,7 +160,7 @@ server.get('/artistInfo/:id', ({ params }, res, next) => {
 });
 
 const loadGenres = (...ids) => {
-	return Promise.all( ids.map( gid => console.log("iterating: ", gid)) ) );
+	return Promise.all( ids.map( gid => console.log("iterating: ", gid) ) );
 }
 
 const loadAlbums = (...ids) => {
