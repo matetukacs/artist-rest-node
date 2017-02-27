@@ -142,8 +142,8 @@ server.get('/artistInfo/:id', ({ params }, res, next) => {
 		return loadGenres(artist.genres).then( genres => {
 			artist.genres = genres;
 			return artist;
-		}
-	});
+		});
+	};
 	const loadAlbums = artist => loadAlbums(artist.albums).then( albums => {
 		artist.albums = albums;
 		return artist;
