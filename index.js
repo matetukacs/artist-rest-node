@@ -11,7 +11,6 @@ mongoose.Promise = global.Promise;
 
 const server = restify.createServer({});
 
-server.use(restify.bodyParser());
 server.use(restify.jsonBodyParser({ mapParams: true }));
 server.use(restify.fullResponse());
 
