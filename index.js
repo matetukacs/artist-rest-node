@@ -107,7 +107,7 @@ server.del('/genre/:id', ({ params }, res, next) => {
 const Album = mongoose.model('Album', AlbumSchema); 
 
 server.get('/albums', (req, res, next) => {
-	Album.find().then(sendResponseAndNext(res, next));
+	Album.find().then(console.log);
 });
 
 server.post('/album', ({ params }, res, next) => {
