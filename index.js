@@ -140,7 +140,8 @@ server.get('/artistInfo/:id', ({ params }, res, next) => {
 
 	const loadArtistGenres = artist => {
 		console.log("loadGenres", artist);
-		return loadGenres(artist.genres).then( ...genres => {
+		return loadGenres(artist.genres).then( genres => {
+			console.log("genres", genres);
 			artist.genres = genres;
 			return artist;
 		});
