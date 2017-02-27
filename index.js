@@ -6,8 +6,8 @@ const artistApi = require('./api/artist');
 const genreApi = require('./api/genre');
 const albumApi = require('./api/album');
 
-mongoose.connect(config.mongoose.auth);
 mongoose.Promise = global.Promise;
+mongoose.connect(config.mongoose.auth);
 
 const server = restify.createServer({});
 
