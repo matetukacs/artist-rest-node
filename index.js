@@ -127,10 +127,8 @@ server.post('/album', ({ params, files }, res, next) => {
 	
 
 	r.postRequest(config.file_store_request_url, {fileUpload: files.image})
-	.then(console.log);
-
-	// 	saveAlbum(params.name)(url) )
-	// .then( sendEmptyResponseAndNext(res, next) );
+	.then(( { url } ) => saveAlbum(params.name)(url) )
+	.then( sendEmptyResponseAndNext(res, next) );
 });
 
 server.get('/album/:id', ({ params }, res, next) => {
