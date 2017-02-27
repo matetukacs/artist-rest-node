@@ -28,19 +28,19 @@ var ArtistSchema = new Schema({
 
 const Artist = mongoose.model('Artist', ArtistSchema); 
 
-var newArtist = new Artist({ 
-  	name: "John Lenon",
-  	genres: ["g1", "g2", "g3"],
-  	albums: ["a1", "a2", "a3"] });
-
-newArtist.save();
-
 server.get('/artists', (a, res, next) => {
 	Artist.find().then( data => res.send(data) );
 });
 
 server.get('/artist/:id', ({ params }, res, next) => {
 	Artist.findById(params.id).then( data => res.send(data) );
+});
+
+server.put('/artist/:id', ({ params, body }, res, next) => {
+	Artist.UPDATE({ 
+		name: body.name, 
+		genres: body.genres, 
+		albums: body.albums }, { id: params.id }).then( data => res.send(data) );
 });
 
 // 		
