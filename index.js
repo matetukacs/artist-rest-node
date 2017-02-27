@@ -46,9 +46,9 @@ server.get('/artists', (req, res, next) => {
 server.post('/artist', ({ params }, res, next) => {
 
 	const newArtist = new Artist();
-	newArtist.name = "sad";
-	newArtist.genres = ["58b3dacd06906a0011713b74", "58b3b4d8ba7a5400111f396b"];
-	newArtist.albums = ["58b3daff06906a0011713b76"];
+	newArtist.name = params.name;
+	newArtist.genres = params.genres;
+	newArtist.albums = params.albums;
 
 	newArtist.save().then( sendEmptyResponseAndNext(res, next) );
 });
@@ -138,14 +138,14 @@ server.del('/album/:id', ({ params }, res, next) => {
 
 server.get('/artistInfo/:id', ({ params }, res, next) => {
 
-	const loadGenres = artist => {
+	const loadArtistGenres = artist => {
 		console.log("loadGenres", artist);
 		return loadGenres(artist.genres).then( genres => {
 			artist.genres = genres;
 			return artist;
 		});
 	}
-	const loadAlbums = artist => {
+	const loadArtistAlbums = artist => {
 		return loadAlbums(artist.albums).then( albums => {
 			artist.albums = albums;
 			return artist;
@@ -153,8 +153,8 @@ server.get('/artistInfo/:id', ({ params }, res, next) => {
 	}
 
 	Artist.findById(params.id)
-	.then(loadGenres)
-	.then(loadAlbums)
+	.then(loadArtistGenres)
+	.then(loadArtistAlbums)
 	.then( sendResponse(res), next );
 });
 
