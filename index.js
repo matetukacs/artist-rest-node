@@ -46,4 +46,8 @@ server.put('/artist/:id', ({ params, body }, res, next) => {
 	});
 });
 
+server.del('/artist/:id', ({ params }, res, next) => {
+	Artist.findByIdAndRemove(params.id).then( data => res.send(data) );
+});
+
 // 		
