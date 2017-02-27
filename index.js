@@ -45,9 +45,9 @@ server.get('/artists', (a, res, next) => {
 server.post('/artist', ({ params }, res, next) => {
 
 	const newArtist = new Artist();
-	newArtist.name = body.name;
-	newArtist.genres = body.genres;
-	newArtist.albums = body.albums;
+	newArtist.name = params.name;
+	newArtist.genres = params.genres;
+	newArtist.albums = params.albums;
 
 	newArtist.save().then( data => res.send(data) );
 });
