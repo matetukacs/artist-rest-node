@@ -13,8 +13,6 @@ const server = restify.createServer({});
 
 server.use(restify.bodyParser());
 server.use(restify.jsonBodyParser({ mapParams: true }));
-server.use(restify.acceptParser(server.acceptable));
-server.use(restify.queryParser({ mapParams: true }));
 server.use(restify.fullResponse());
 
 server.listen(process.env.PORT || 5000, () => {
