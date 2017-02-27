@@ -1,15 +1,14 @@
 const _ = require('lodash');
 
-module.exports.common = {
-	sendResponseAndNext : (res, next) => _.flow(sendResponse(res), next),
+module.exports.sendResponseAndNext = (res, next) => _.flow(sendResponse(res), next);
 
-	sendResponse : (res) => {
-		return (data = "") => res.send(data);
-	},
+module.exports.sendResponse = (res) => {
+	return (data = "") => res.send(data);
+}
 
- 	sendEmptyResponseAndNext : (res, next) => _.flow(sendEmptyResponse(res), next),
+module.exports.sendEmptyResponseAndNext = (res, next) => _.flow(sendEmptyResponse(res), next);
 
-	sendEmptyResponse : (res) => {
-		return () => res.send();
-	}	
+module.exports.sendEmptyResponse = (res) => {
+	return () => res.send();
+}	
 }

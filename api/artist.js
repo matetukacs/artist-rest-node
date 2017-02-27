@@ -2,16 +2,14 @@ const mongoose = require('mongoose');
 const schema = require('./../schema');
 const api = require('./api');
 
-this.prototype.common = api.common;
-
 const Artist = mongoose.model('Artist', schema.Artist); 
 
 module.exports.findAll = (req, res, next) => {
-	Artist.find().then( sendResponseAndNext(res, next) );
+	Artist.find().then( api.sendResponseAndNext(res, next) );
 }
 
 module.exports.findById = ({ params }, res, next) => {
-	Artist.findById(params.id).then( sendResponseAndNext(res, next) );
+	Artist.findById(params.id).then( api.sendResponseAndNext(res, next) );
 }
 
 module.exports.create = ({ params }, res, next) => {
@@ -21,7 +19,7 @@ module.exports.create = ({ params }, res, next) => {
 	newArtist.genres = params.genres;
 	newArtist.albums = params.albums;
 
-	newArtist.save().then( sendEmptyResponseAndNext(res, next) );
+	newArtist.save().then( api.sendEmptyResponseAndNext(res, next) );
 }
 
 module.exports.update = ({ params, body }, res, next) => {
@@ -30,10 +28,10 @@ module.exports.update = ({ params, body }, res, next) => {
 		artist.genres = body.genres;
 		artist.albums = body.albums;
 
-		artist.save().then( sendEmptyResponseAndNext(res, next) );
+		artist.save().then( api.sendEmptyResponseAndNext(res, next) );
 	});
 }
 
 module.exports.delete = ({ params }, res, next) => {
-	Artist.findByIdAndRemove(params.id).then( sendEmptyResponseAndNext(res, next) );
+	Artist.findByIdAndRemove(params.id).then( api.sendEmptyResponseAndNext(res, next) );
 }
