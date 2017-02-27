@@ -33,15 +33,17 @@ server.put('/artist/:id', artistApi.update);
 
 server.del('/artist/:id', artistApi.delete);
 
+
+
 server.get('/genres', genreApi.findAll);
 
 server.post('/genre', genreApi.create);
 
 server.get('/genre/:id', genreApi.findById);
 
-server.put('/genre/:id', genreApi.update;
+server.put('/genre/:id', genreApi.update);
 
-server.del('/genre/:id', genreApi.delete;
+server.del('/genre/:id', genreApi.delete);
 
 
 
