@@ -33,7 +33,7 @@ const GenreSchema = new Schema({
 const AlbumSchema = new Schema({
   id: mongoose.Schema.ObjectId,
   name: String,
-  imageUrl, String
+  imageUrl: String
 });
 
 const Artist = mongoose.model('Artist', ArtistSchema); 
