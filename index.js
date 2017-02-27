@@ -22,8 +22,6 @@ server.listen(process.env.PORT || 5000, () => {
 
 mongoose.Promise = global.Promise;
 
-const Artist = mongoose.model('Artist', schema.Artist); 
-
 server.get('/artists', artistApi.findAll);
 
 server.post('/artist', artistApi.create);

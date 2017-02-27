@@ -1,3 +1,7 @@
+const { model } = require('mongoose');
+const schema = require('./schema');
+
+const Artist = model('Artist', schema.Artist); 
 
 module.exports.findAll = (req, res, next) => {
 	Artist.find().then( sendResponseAndNext(res, next) );
