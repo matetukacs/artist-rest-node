@@ -60,23 +60,7 @@ server.del('/album/:id', albumApi.delete);
 
 
 
-server.get('/artistInfo/:id', ({ params }, res, next) => {
-
-	const loadArtistGenres = artist => loadGenres(artist.genres).then( genres => {
-		artist.genres = genres;
-		return artist;
-	});
-
-	const loadArtistAlbums = artist => loadAlbums(artist.albums).then( albums => {
-		artist.albums = albums;
-		return artist;
-	});
-
-	Artist.findById(params.id)
-	.then(loadArtistGenres)
-	.then(loadArtistAlbums)
-	.then( sendResponse(res), next );
-});
+server.get('/artistInfo/:id', artistApi.getArtistInfo);
 
 const loadGenres = (ids) => {
 	return Promise.all( ids.map( gid => Genre.findById(gid) ) );

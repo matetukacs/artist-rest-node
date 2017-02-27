@@ -1,8 +1,8 @@
-const { model } = require('mongoose');
+const mongoose = require('mongoose');
 const schema = require('./../schema');
 const api = require('./api');
 
-const Genre = model('Genre', schema.Genre); 
+const Genre = mongoose.model('Genre', schema.Genre); 
 
 module.exports.findAll = (req, res, next) => {
 	Genre.find().then( api.sendResponseAndNext(res, next) );

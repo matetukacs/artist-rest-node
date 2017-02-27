@@ -35,3 +35,21 @@ module.exports.update = ({ params, body }, res, next) => {
 module.exports.delete = ({ params }, res, next) => {
 	Artist.findByIdAndRemove(params.id).then( api.sendEmptyResponseAndNext(res, next) );
 }
+
+module.exports.getArtistInfo = ({ params }, res, next) => {
+
+	const loadArtistGenres = artist => loadGenres(artist.genres).then( genres => {
+		artist.genres = genres;
+		return artist;
+	});
+
+	const loadArtistAlbums = artist => loadAlbums(artist.albums).then( albums => {
+		artist.albums = albums;
+		return artist;
+	});
+
+	Artist.findById(params.id)
+	.then(loadArtistGenres)
+	.then(loadArtistAlbums)
+	.then( sendResponse(res), next );
+}
