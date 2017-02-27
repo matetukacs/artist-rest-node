@@ -53,3 +53,13 @@ module.exports.getArtistInfo = ({ params }, res, next) => {
 	.then(loadArtistAlbums)
 	.then( api.sendResponseAndNext );
 }
+
+const loadGenres = (ids) => {
+	const Genre = mongoose.model('Genre', schema.Genre); 
+	return Promise.all( ids.map( gid => Genre.findById(gid) ) );
+}
+
+const loadAlbums = (ids) => {
+	const Album = mongoose.model('Album', schema.Album);
+	return Promise.all( ids.map( aid => Album.findById(aid) ) );
+}

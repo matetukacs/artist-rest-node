@@ -4,13 +4,14 @@ const config = require('./config');
 const _ = require('lodash');
 
 const r = require('./request');
-const schema = require('./schema');
 const artistApi = require('./api/artist');
 const genreApi = require('./api/genre');
 const albumApi = require('./api/album');
 
 const server = restify.createServer({});
 const db = mongoose.connect(config.mongoose.auth);
+
+mongoose.Promise = global.Promise;
 
 server.use(restify.bodyParser());
 server.use(restify.jsonBodyParser({ mapParams: true }));
@@ -21,8 +22,6 @@ server.use(restify.fullResponse());
 server.listen(process.env.PORT || 5000, () => {
   console.log('running');
 });
-
-mongoose.Promise = global.Promise;
 
 server.get('/artists', artistApi.findAll);
 
