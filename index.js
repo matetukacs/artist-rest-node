@@ -125,7 +125,7 @@ server.post('/album', ({ params, files }, res, next) => {
 		}
 	}
 	
-	const fileStoreUrl = 'https://www.filestackapi.com/api/store/S3?key='+config.filestack_api_key;
+	const fileStoreUrl = 'https://www.filestackapi.com/api/store/S3?key='+config.creds.filestack_api_key;
 
 	r.postRequest(fileStoreUrl, {fileUpload: files.image})
 	.then( ( { url } ) => saveAlbum(params.name)(url) )
