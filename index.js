@@ -1,6 +1,7 @@
 const restify = require('restify'); 
 const mongoose = require('mongoose');
 const config = require('./config');
+const _ = require('lodash/core');
 
 const server = restify.createServer({});
 const db = mongoose.connect(config.creds.mongoose_auth);
@@ -38,7 +39,7 @@ const AlbumSchema = new Schema({
 
 const Artist = mongoose.model('Artist', ArtistSchema); 
 
-server.get('/artists', (a, res, next) => {
+server.get('/artists', (req, res, next) => {
 	Artist.find().then( data => res.send(data) );
 });
 
@@ -73,7 +74,7 @@ server.del('/artist/:id', ({ params }, res, next) => {
 
 const Genre = mongoose.model('Genre', GenreSchema); 
 
-server.get('/genres', (a, res, next) => {
+server.get('/genres', (req, res, next) => {
 	Genre.find().then( data => res.send(data) );
 });
 
@@ -105,8 +106,8 @@ server.del('/genre/:id', ({ params }, res, next) => {
 
 const Album = mongoose.model('Album', AlbumSchema); 
 
-server.get('/albums', (a, res, next) => {
-	Album.find().then( data => res.send(data) );
+server.get('/albums', (req, res, next) => {
+	Album.find().then( _.flow(res.send, next) );
 });
 
 server.post('/album', ({ params }, res, next) => {
