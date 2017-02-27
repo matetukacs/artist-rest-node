@@ -61,23 +61,3 @@ server.del('/album/:id', albumApi.delete);
 
 
 server.get('/artistInfo/:id', artistApi.getArtistInfo);
-
-const loadGenres = (ids) => {
-	return Promise.all( ids.map( gid => Genre.findById(gid) ) );
-}
-
-const loadAlbums = (ids) => {
-	return Promise.all( ids.map( aid => Album.findById(aid) ) );
-}
-
-const sendResponseAndNext = (res, next) => _.flow(sendResponse(res), next);
-
-const sendResponse = (res) => {
-	return (data = "") => res.send(data);
-}
-
-const sendEmptyResponseAndNext = (res, next) => _.flow(sendEmptyResponse(res), next);
-
-const sendEmptyResponse = (res) => {
-	return () => res.send();
-}	
