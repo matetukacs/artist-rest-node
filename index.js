@@ -138,14 +138,12 @@ server.del('/album/:id', ({ params }, res, next) => {
 
 server.get('/artistInfo/:id', ({ params }, res, next) => {
 
-	const loadArtistGenres = artist => {
-		console.log("loadGenres", artist);
-		return loadGenres(artist.genres).then( genres => {
+	const loadArtistGenres = artist => loadGenres(artist.genres).then( genres => {
 			console.log("genres", genres);
 			artist.genres = genres;
 			return artist;
 		});
-	}
+
 	const loadArtistAlbums = artist => {
 		return loadAlbums(artist.albums).then( albums => {
 			artist.albums = albums;
